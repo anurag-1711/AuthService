@@ -18,7 +18,27 @@ const create = async (req, res) => {
         console.log(error);
         return res.status(500).json({
             data: {},
-            message: "Something went wrong",
+            message: "Something went wrong in the controller layer",
+            success: false,
+            err: error
+        })
+    }
+}
+
+const getById = async (req, res) => {
+    try {
+        const user = await userService.getById(req.body.id);
+        return res.status(200).json({
+            data: user,
+            message: "Succesfully retrived a user",
+            success: true,
+            err: {}
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            data: {},
+            message: "Something went wrong in the controller layer",
             success: false,
             err: error
         })
@@ -26,5 +46,6 @@ const create = async (req, res) => {
 }
 
 module.exports = {
-    create
+    create,
+    getById
 }
