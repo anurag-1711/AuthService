@@ -45,7 +45,28 @@ const getById = async (req, res) => {
     }
 }
 
+const signIn = async (req, res) => {
+    try {
+        const response = await userService.signIn(req.body.email, req.body.password);
+        return res.status(200).json({
+            token: response,
+            message: "Succesfully signed in",
+            success: true,
+            err: {}
+        })
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            data: {},
+            message: "Something went wrong in the controller layer",
+            success: false,
+            err: error
+        })
+    }
+}
+
 module.exports = {
     create,
-    getById
+    getById,
+    signIn
 }

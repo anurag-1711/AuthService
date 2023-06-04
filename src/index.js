@@ -15,7 +15,7 @@ const prepareAndStartServer = () => {
 
     app.use("/api", apiRoutes);
 
-    app.listen(PORT, () => {
+    app.listen(PORT, async () => {
         console.log(`Server started on PORT ${PORT}`);
 
         // const userService = new UserService();
@@ -28,6 +28,10 @@ const prepareAndStartServer = () => {
 
         // const res = userService.checkPassword("123456", "$2b$10$ZLqJfPO9GbnA76/ZegkjH.9DK6hpN1qOx1kLI9iX8Z6lI6myXxqxu");
         // console.log(res);
+
+        // const res = await userService.signIn("anu@admin.com", "123456");
+        // console.log("hello")
+        // console.log("Token is", res);
     })
 }
 
