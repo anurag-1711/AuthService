@@ -7,6 +7,7 @@ const { PORT } = require("./config/serverConfig");
 const apiRoutes = require("./routes/index");
 
 // const UserService = require("./services/user-service");
+const db = require("./models/index");
 
 const prepareAndStartServer = () => {
 
@@ -17,6 +18,19 @@ const prepareAndStartServer = () => {
 
     app.listen(PORT, async () => {
         console.log(`Server started on PORT ${PORT}`);
+
+        if (process.env.DB_SYNC) {
+            db.sequelize.sync({ alter: true })
+        }
+
+        // const { User, Role } = db;
+        // const user = await User.findByPk(4);
+        // const role = await Role.findByPk(2);
+
+        // user.addRole(role);
+        // console.log(await user.hasRole(role));
+
+        // console.log(user)
 
         // const userService = new UserService();
         // const token = userService.createToken({ email: "anurag@gmail.com", id: 1 });
